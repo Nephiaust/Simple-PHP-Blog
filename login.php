@@ -1,4 +1,5 @@
 <?php
+require_once 'includes.php';
 require_once 'header.php';
 
 // Set a temporary variable to track if there is a login error (e.g. username / password mismatch or missing in the login request.)

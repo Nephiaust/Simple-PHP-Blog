@@ -1,4 +1,5 @@
 <?php
+require_once 'includes.php';
 require_once 'header.php';
 
 # Turn on debug mode, and show all errors.
