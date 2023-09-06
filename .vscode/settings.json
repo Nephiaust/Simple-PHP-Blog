@@ -1,5 +1,9 @@
 {
     "githubPullRequests.ignoredPullRequestBranches": [
         "master"
-    ]
+    ],
+    "prettier.printWidth": 800,
+    "prettier.bracketSameLine": true,
+    "prettier.tabWidth": 4,
+    "prettier.useTabs": false
 }
