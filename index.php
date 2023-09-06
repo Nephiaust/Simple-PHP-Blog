@@ -96,7 +96,7 @@ if (mysqli_num_rows($result) < 1) {
         echo '<a class="btn btn-outline-primary rounded-pill" href="?page=$totalpages">Newest</a>';
     }
 
-    echo "</nav>";
+    echo "</nav></main>";
 }
 
 

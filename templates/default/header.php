@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
 
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PHP Blog</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.27.3/ui/trumbowyg.min.css" />
@@ -108,7 +108,7 @@
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap"></use>
                 </svg>
-                <span class="fs-4">PHP Blog</span>
+                <span class="fs-4">Simple-PHP-Blog</span>
             </a>
 
             <ul class="nav nav-pills">
