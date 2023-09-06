@@ -1,6 +1,7 @@
 <?php
 require_once 'includes.php';
-require_once 'header.php';
+require 'header.php';
+
 
 # Turn on debug mode, and show all errors.
 if (DEBUG_MODE == true) {
@@ -8,19 +9,17 @@ if (DEBUG_MODE == true) {
     ini_set("display_errors", 1);
 }
 
-?>
+$tpl = new Template('templates/' . TEMPALTE);
 
-<div class="w3-panel">
-    <p>This is a simple blog project for my PHP development skills.</p>
-</div>
+print $tpl->render('body', array(
+    'url_path' => $url_path
+));
 
-<?php
 // COUNT
 $sql = "SELECT COUNT(*) FROM posts";
 $result = mysqli_query($dbcon, $sql);
 $r = mysqli_fetch_row($result);
 $numrows = $r[0];
-
 $rowsperpage = PAGINATION;
 $totalpages = ceil($numrows / $rowsperpage);
 
@@ -41,60 +40,65 @@ $offset = ($page - 1) * $rowsperpage;
 $sql = "SELECT * FROM posts ORDER BY id DESC LIMIT $offset, $rowsperpage";
 $result = mysqli_query($dbcon, $sql);
 
+
 if (mysqli_num_rows($result) < 1) {
-    echo '<div class="w3-panel w3-pale-red w3-card-2 w3-border w3-round">No post yet!</div>';
+    print $tpl->render('body_post-emtpy', array(
+        'url_path' => $url_path
+    ));
 } else {
     while ($row = mysqli_fetch_assoc($result)) {
 
         $id = htmlentities($row['id']);
         $title = htmlentities($row['title']);
         $des = htmlentities(strip_tags($row['description']));
+        $shortDesc = substr($des, 0, 100);
         $slug = htmlentities($row['slug']);
         $time = htmlentities($row['date']);
+        $createdby = htmlentities($row['posted_by']);
 
         $permalink = "p/" . $id . "/" . $slug;
-
-        echo '<div class="w3-panel w3-sand w3-card-4">';
-        echo "<h3><a href='$permalink'>$title</a></h3><p>";
-
-        echo substr($des, 0, 100);
-
-        echo '<div class="w3-text-teal">';
-        echo "<a href='$permalink'>Read more...</a></p>";
-
-        echo '</div>';
-        echo "<div class='w3-text-grey'> $time </div>";
-        echo '</div>';
+        print $tpl->render('body_post', array(
+            'title' => $title,
+            'createdby' => $createdby,
+            'permalink' => $permalink,
+            'time' => $time,
+            'shortDesc' => $shortDesc,
+            'url_path' => $url_path
+        ));
     }
 
 
-    echo "<p><div class='w3-bar w3-center'>";
+    //<a class="btn btn-outline-primary rounded-pill" href="#">Older</a>
+    // <a class="btn btn-outline-secondary rounded-pill disabled" aria-disabled="true">Newer</a>
+
+    echo '<nav class="blog-pagination" aria-label="Pagination">';
 
     if ($page > 1) {
-        echo "<a href='?page=1'>&laquo;</a>";
+        echo '<a class="btn btn-outline-primary rounded-pill" href="?page=1">Oldest</a>';
         $prevpage = $page - 1;
-        echo "<a href='?page=$prevpage' class='w3-btn'><</a>";
+        echo '<a class="btn btn-outline-primary rounded-pill" href="?page=$prevpage">Older</a>';
     }
 
     $range = 5;
     for ($x = $page - $range; $x < ($page + $range) + 1; $x++) {
         if (($x > 0) && ($x <= $totalpages)) {
             if ($x == $page) {
-                echo "<div class='w3-teal w3-button'>$x</div>";
+                echo '<a class="btn btn-outline-secondary rounded-pill disabled" aria-disabled="true">'.$x.'</a>';
             } else {
-                echo "<a href='?page=$x' class='w3-button w3-border'>$x</a>";
+                echo '<a class="btn btn-outline-primary rounded-pill" href="?page=$x">'.$x.'</a>';
             }
         }
     }
 
     if ($page != $totalpages) {
         $nextpage = $page + 1;
-        echo "<a href='?page=$nextpage' class='w3-button'>></a>";
-        echo "<a href='?page=$totalpages' class='w3-btn'>&raquo;</a>";
+        echo '<a class="btn btn-outline-primary rounded-pill" href="?page=$nextpage">Newer</a>';
+        echo '<a class="btn btn-outline-primary rounded-pill" href="?page=$totalpages">Newest</a>';
     }
 
-    echo "</div></p>";
+    echo "</nav>";
 }
 
-include("categories.php");
+
+//include("categories.php");
 include("footer.php");
