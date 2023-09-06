@@ -1,4 +1,5 @@
 <?php
+
 /* Database credentials.*/
 define('DB_TYPE', 'mysql');         // NOT USED
 define('DB_SERVER', 'LOCALHOST');   // Server name/IP for the mysql server
@@ -10,4 +11,7 @@ define('DB_CHARSET', 'utf8');       // What character set are we using
 /* Define some settings for the blog */
 define('SITE_ROOT', ''); // If installed on a sub-folder. E.g. if installed to 'www.example.com/blog', enter 'blog' for SITE_ROOT
 define('PAGINATION', 10); // Pagination results per page
-define('DEBUG_MODE', false); // Turns on all debug errors 
+define('TEMPALTE', 'default'); // What template are we using by default?
+
+/* Some misc stuff, not required for the blog itself */
+define('DEBUG_MODE', false); // Turns on all debug errors
