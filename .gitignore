@@ -1,5 +1,6 @@
 .idea
 /uploads/*
+/depreciated/*
 
 # General Apple files
 .DS_Store
