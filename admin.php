@@ -9,15 +9,15 @@ if (DEBUG_MODE == true) {
     ini_set("display_errors", 1);
 }
 
-?>
-<h2 class="w3-container w3-teal w3-center">Admin Dashboard</h2>
-<div class="w3-container">
-    <p>Welcome <?php echo $_SESSION['displayname']; ?>,</p>
-    <p><a href="new.php" class="w3-button w3-teal">Create new post</a></p>
+$DisplayName = $_SESSION['displayname'];
 
-</div>
-<h5 class="w3-center">Posts</h5>
-<?php
+$tpl = new Template('templates/' . TEMPALTE);
+
+print $tpl->render('admin-top', array(
+    'displayname' => $DisplayName,
+    'url_path' => $url_path
+));
+
 $sql = "SELECT COUNT(*) FROM posts";
 $result = mysqli_query($dbcon, $sql);
 $r = mysqli_fetch_row($result);
@@ -44,14 +44,6 @@ $result = mysqli_query($dbcon, $sql);
 if (mysqli_num_rows($result) < 1) {
     echo "No post found";
 }
-echo "<table class='w3-table-all'>";
-echo "<tr class='w3-teal w3-hover-green'>";
-echo "<th>ID</th>";
-echo "<th>Title</th>";
-echo "<th>Date</th>";
-echo "<th>Views</th>";
-echo "<th>Action</th>";
-echo "</tr>";
 
 while ($row = mysqli_fetch_assoc($result)) {
     $id = $row['id'];
@@ -59,45 +51,50 @@ while ($row = mysqli_fetch_assoc($result)) {
     $slug = $row['slug'];
     $author = $row['posted_by'];
     $time = $row['date'];
-
     $permalink = "p/" . $id . "/" . $slug;
-?>
 
-    <tr>
-        <td><?php echo $id; ?></td>
-        <td><a href="<?php echo $permalink; ?>"><?php echo substr($title, 0, 50); ?></a></td>
-        <td><?php echo $time; ?></td>
-        <td><?php echo "<h3><a href='$permalink'>view post</a></h3><p>"; ?></td>
-        <td><a href="edit.php?id=<?php echo $id; ?>">Edit</a> | <a href="del.php?id=<?php echo $id; ?>" onclick="return confirm('Are you sure you want to delete this post?')">Delete</a>
-        </td>
-    </tr>
-
-<?php
+    print $tpl->render('admin-middle', array(
+        'id' => $id,
+        'title' => $title,
+        'author' => $author,
+        'time' => $time,
+        'permalink' => $permalink,
+        'url_path' => $url_path
+    ));
 }
-echo "</table>";
+print $tpl->render('admin-middle2', array(
+    'url_path' => $url_path
+));
 
 // pagination
-echo "<p><div class='w3-bar w3-center'>";
+echo "\n";
+echo "<div class='col-md-auto'>";
 if ($page > 1) {
-    echo "<a href='?page=1' class='w3-btn'><<</a>";
+    echo "<a href='?page=1' class='btn btn-link'>&laquo;&laquo;</a>";
     $prevpage = $page - 1;
-    echo "<a href='?page=$prevpage' class='w3-btn'><</a>";
+    echo "<a href='?page=$prevpage' class='btn btn-link'>&laquo;</a>";
 }
 $range = 3;
 for ($i = ($page - $range); $i < ($page + $range) + 1; $i++) {
     if (($i > 0) && ($i <= $totalpages)) {
         if ($i == $page) {
-            echo "<div class='w3-btn w3-teal w3-hover-green'> $i</div>";
+            echo "<div class='btn btn-link'> $i</div>";
         } else {
-            echo "<a href='?page=$i' class='w3-btn w3-border'>$i</a>";
+            echo "<a href='?page=$i' class='btn btn-link'>$i</a>";
         }
     }
 }
 if ($page != $totalpages) {
     $nextpage = $page + 1;
-    echo "<a href='?page=$nextpage' class='w3-btn'>></a>";
-    echo "<a href='?page=$totalpages' class='w3-btn'>>></a>";
+    echo "<a href='?page=$nextpage' class='btn btn-link'>&raquo;</a>";
+    echo "<a href='?page=$totalpages' class='btn btn-link'>&raquo;&raquo;</a>";
 }
-echo "</div></p>";
+echo "</div>";
+echo "\n";
+
+print $tpl->render('admin-bottom', array(
+    'displayname' => $DisplayName,
+    'url_path' => $url_path
+));
 
 include("footer.php");
