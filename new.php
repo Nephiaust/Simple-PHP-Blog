@@ -9,6 +9,8 @@ if (DEBUG_MODE == true) {
     ini_set("display_errors", 1);
 }
 
+$tpl = new Template('templates/' . TEMPALTE);
+
 if (isset($_POST['submit'])) {
     $title = mysqli_real_escape_string($dbcon, $_POST['title']);
     $description = mysqli_real_escape_string($dbcon, $_POST['description']);
@@ -21,37 +23,13 @@ if (isset($_POST['submit'])) {
 
     $permalink = "p/" . mysqli_insert_id($dbcon) . "/" . $slug;
 
-    printf(
-        "Posted successfully. <meta http-equiv='refresh' content='2; url=%s'/>",
-        $permalink
-    );
+    print $tpl->render('new_post-success', array(
+        'permalink' => $permalink
+    ));
 } else {
-?>
-    <div class="w3-container">
-        <div class="w3-card-4">
-            <div class="w3-container w3-teal">
-                <h2>New Post</h2>
-            </div>
-
-            <form class="w3-container" method="POST">
-
-                <p>
-                    <label>Title</label>
-                    <input type="text" class="w3-input w3-border" name="title" required>
-                </p>
-
-                <p>
-                    <label>Description</label>
-                    <textarea id="description" row="30" cols="50" class="w3-input w3-border" name="description" required /></textarea>
-                </p>
-                <p>
-                    <input type="submit" class="w3-btn w3-teal w3-round" name="submit" value="Post">
-                </p>
-            </form>
-
-        </div>
-    </div>
-<?php
+    print $tpl->render('new_post', array(
+        'url_path' => $url_path
+    ));
 }
 
 include("footer.php");
