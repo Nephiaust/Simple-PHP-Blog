@@ -42,7 +42,7 @@ $result = mysqli_query($dbcon, $sql);
 
 
 if (mysqli_num_rows($result) < 1) {
-    print $tpl->render('body_post-emtpy', array(
+    print $tpl->render('body_post-empty', array(
         'url_path' => $url_path
     ));
 } else {
