@@ -5,7 +5,7 @@
             <form class="needs-validation" novalidate method="POST">
                 <div class="col-sm-6">
                     <label for="firstName" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="Title" placeholder="" value="" name="title" required placeholder="Enter a catchy title">
+                    <input type="text" class="form-control" id="Title" value="" name="title" required placeholder="Enter a catchy title">
                     <div class="invalid-feedback">
                         A valid title is required.
                     </div>
