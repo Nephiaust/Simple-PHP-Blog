@@ -96,9 +96,11 @@ if (mysqli_num_rows($result) < 1) {
         echo '<a class="btn btn-outline-primary rounded-pill" href="?page=$totalpages">Newest</a>';
     }
 
-    echo "</nav></main>";
+    echo "</nav>";
 }
-
+print $tpl->render('body_bottom', array(
+    'url_path' => $url_path
+));
 
 //include("categories.php");
 include("footer.php");
