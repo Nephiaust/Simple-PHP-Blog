@@ -1,5 +1,8 @@
 <?php
 
+/*
+   ** Sets up to enable/disable the first/last parts of the pagination nav bar
+*/
 if ($CurrentPage > 1) {
     $DisablePrevious = false;
 } else {
@@ -10,21 +13,14 @@ if ($CurrentPage !=  $PageCount) {
 } else {
     $DisableNext = true;
 }
-
-/*
-$PageURL
-$PageCount
-
-
-$DisablePrevious
-$DisableNext
-*/
 ?>
 
 <nav aria-label="Page navigation">
     <ul class="pagination justify-content-center">
 
-        <?php if ($DisablePrevious) {
+        <?php
+        // Outputs the required sections for the first/previous nav options.
+        if ($DisablePrevious) {
             echo '       <li class="page-item disabled">' . "\r\n";
             echo '           <span class="page-link"><i class="fa-solid fa-angles-left"></i></span>' . "\r\n";
             echo '       </li>' . "\r\n";
@@ -41,7 +37,9 @@ $DisableNext
         } ?>
         </li>
 
-        <?php for ($PageI = ($CurrentPage - 3); $PageI < ($CurrentPage + 3) + 1; $PageI++) {
+        <?php
+        // Creates the page number nav buttons at the bottom of the page. Starts counting from the current page number minus 3 (skips any negative numbers AND any above the total page count)
+        for ($PageI = ($CurrentPage - ShowPagination); $PageI < ($CurrentPage + ShowPagination) + 1; $PageI++) {
             if (($PageI > 0) && ($PageI <= $PageCount)) {
                 if ($PageI == $CurrentPage) {
                     echo '        <li class="page-item"><a class="page-link active" aria-current="page" href="' . $PageURL . $ReferralPage . '.php?page=' . $PageI . '">' . $PageI . '</a></li>' . "\r\n";
@@ -50,6 +48,8 @@ $DisableNext
                 }
             }
         }
+
+        // Outputs the required sections for the next/last nav options.
         if ($DisableNext) {
             echo '        <li class="page-item disabled">' . "\r\n";
             echo '            <span class="page-link"><i class="fa-solid fa-angle-right"></i></span>' . "\r\n";
