@@ -8,18 +8,23 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.27.3/ui/trumbowyg.min.css" />
 
-    <!-- Bootstrap v5.3 -->
+    <!-- Bootstrap v5.3.1 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?php echo $url_path; ?>js/color-modes.js"></script>
 
-    <!-- Font Awesome 6.4 -->
+    <!-- Font Awesome 6.4.2 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" />
 
+    <!-- Bootstrap Table v1.22.1 -->
+    <link rel="stylesheet" href="<?php echo $url_path; ?>css/bootstrap-table.css">
+    <script src="<?php echo $url_path; ?>js/bootstrap-table.js"></script>
+    <script src="<?php echo $url_path; ?>js/bootstrap-table-locale-all.js"></script>
+
     <!-- Custom CSS -->
-    <link href="css/mycustom.css" rel="stylesheet" />
+    <link href="<?php echo $url_path; ?>css/mycustom.css" rel="stylesheet" />
 </head>
 
 <body>
