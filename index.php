@@ -40,7 +40,6 @@ $offset = ($page - 1) * $rowsperpage;
 $sql = "SELECT * FROM posts ORDER BY id DESC LIMIT $offset, $rowsperpage";
 $result = mysqli_query($dbcon, $sql);
 
-
 if (mysqli_num_rows($result) < 1) {
     print $tpl->render('body_post-empty', array(
         'url_path' => $url_path
@@ -67,36 +66,12 @@ if (mysqli_num_rows($result) < 1) {
         ));
     }
 
-
-    //<a class="btn btn-outline-primary rounded-pill" href="#">Older</a>
-    // <a class="btn btn-outline-secondary rounded-pill disabled" aria-disabled="true">Newer</a>
-
-    echo '<nav class="blog-pagination" aria-label="Pagination">';
-
-    if ($page > 1) {
-        echo '<a class="btn btn-outline-primary rounded-pill" href="?page=1">Oldest</a>';
-        $prevpage = $page - 1;
-        echo '<a class="btn btn-outline-primary rounded-pill" href="?page=$prevpage">Older</a>';
-    }
-
-    $range = 5;
-    for ($x = $page - $range; $x < ($page + $range) + 1; $x++) {
-        if (($x > 0) && ($x <= $totalpages)) {
-            if ($x == $page) {
-                echo '<a class="btn btn-outline-secondary rounded-pill disabled" aria-disabled="true">'.$x.'</a>';
-            } else {
-                echo '<a class="btn btn-outline-primary rounded-pill" href="?page=$x">'.$x.'</a>';
-            }
-        }
-    }
-
-    if ($page != $totalpages) {
-        $nextpage = $page + 1;
-        echo '<a class="btn btn-outline-primary rounded-pill" href="?page=$nextpage">Newer</a>';
-        echo '<a class="btn btn-outline-primary rounded-pill" href="?page=$totalpages">Newest</a>';
-    }
-
-    echo "</nav>";
+    // pagination
+    print $tpl->render('pagination', array(
+        'CurrentPage' => $page,
+        'PageCount' => $totalpages,
+        'ReferralPage' => 'index'
+    ));
 }
 print $tpl->render('body_bottom', array(
     'url_path' => $url_path
