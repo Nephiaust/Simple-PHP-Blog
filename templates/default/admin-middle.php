@@ -1,5 +1,5 @@
 <tr>
-    <th scope="row"><?php echo $id; ?></th>
+    <th scope="row" class="text-end"><?php echo $id; ?></th>
     <td><?php echo $title; ?></td>
     <td><?php echo $author; ?></td>
     <td><?php echo $time; ?></td>
