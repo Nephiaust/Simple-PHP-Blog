@@ -9,88 +9,75 @@ if (DEBUG_MODE == true) {
     ini_set("display_errors", 1);
 }
 
-$DisplayName = $_SESSION['displayname'];
+$DisplayName = $_SESSION['displayname'];        // Gets the current Display Name for the logged in user
+$rowsperpage = PAGINATION;                      // Store the configured PAGINATION option as a variable to use later.
+$page = 1;                                      // Creates the page variable
+$tpl = new Template('templates/' . TEMPALTE);   // Creates the tpl object so we can reuse it
 
-$tpl = new Template('templates/' . TEMPALTE);
-
+// Display the top part of the admin page.
 print $tpl->render('admin-top', array(
     'displayname' => $DisplayName,
     'url_path' => $url_path
 ));
 
-$sql = "SELECT COUNT(*) FROM posts";
-$result = mysqli_query($dbcon, $sql);
-$r = mysqli_fetch_row($result);
+$sql = "SELECT COUNT(*) FROM posts";            // Get the number of posts available from the SQL server
+$result = mysqli_query($dbcon, $sql);           // Requests the data from the SQL server
+$r = mysqli_fetch_row($result);                 // Gets the first row from the SQL request
 
-$numrows = $r[0];
-$rowsperpage = PAGINATION;
-$totalpages = ceil($numrows / $rowsperpage);
-$page = 1;
+$numrows = $r[0];                               // How many posts do we have to work with?
+$totalpages = ceil($numrows / $rowsperpage);    // Work out how many pages in total we have (rounded to the next integer)
 
+// Checks if the request has the `page` set and is a number, so we can return that page.
 if (isset($_GET['page']) && is_numeric($_GET['page'])) {
     $page = (int)$_GET['page'];
 }
+// Just a check to make sure the requested page is lower than the total number of pages
 if ($page > $totalpages) {
     $page = $totalpages;
 }
+// Just a check to make sure the requested page is 1 or more. We cant havent negative pages.
 if ($page < 1) {
     $page = 1;
 }
-$offset = ($page - 1) * $rowsperpage;
 
-$sql = "SELECT * FROM posts ORDER BY id DESC LIMIT $offset, $rowsperpage";
-$result = mysqli_query($dbcon, $sql);
+$offset = ($page - 1) * $rowsperpage;                                       // Used for the SQL request. Works out the starting from. E.G. If we have 10 posts per page, and are on page 3 we want to get posts from #20 to #30.
+$sql = "SELECT * FROM posts ORDER BY id DESC LIMIT $offset, $rowsperpage";  // Builds the SQL request to get the posts for the current page
+$result = mysqli_query($dbcon, $sql);                                       // Requests the data from the SQL Server
 
+// Check to see if we have some posts, if NOT display no posts; if YES then show them
 if (mysqli_num_rows($result) < 1) {
     echo "No post found";
+} else {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $id = $row['id'];
+        $title = $row['title'];
+        $slug = $row['slug'];
+        $author = $row['posted_by'];
+        $time = $row['date'];
+        $permalink = "p/" . $id . "/" . $slug;
+
+        print $tpl->render('admin-middle', array(
+            'id' => $id,
+            'title' => $title,
+            'author' => $author,
+            'time' => $time,
+            'permalink' => $permalink,
+            'url_path' => $url_path
+        ));
+    }
 }
 
-while ($row = mysqli_fetch_assoc($result)) {
-    $id = $row['id'];
-    $title = $row['title'];
-    $slug = $row['slug'];
-    $author = $row['posted_by'];
-    $time = $row['date'];
-    $permalink = "p/" . $id . "/" . $slug;
-
-    print $tpl->render('admin-middle', array(
-        'id' => $id,
-        'title' => $title,
-        'author' => $author,
-        'time' => $time,
-        'permalink' => $permalink,
-        'url_path' => $url_path
-    ));
-}
+// Finish the table off
 print $tpl->render('admin-middle2', array(
     'url_path' => $url_path
 ));
 
 // pagination
-echo "\n";
-echo "<div class='col-md-auto'>";
-if ($page > 1) {
-    echo "<a href='?page=1' class='btn btn-link'>&laquo;&laquo;</a>";
-    $prevpage = $page - 1;
-    echo "<a href='?page=$prevpage' class='btn btn-link'>&laquo;</a>";
-}
-$range = 3;
-for ($i = ($page - $range); $i < ($page + $range) + 1; $i++) {
-    if (($i > 0) && ($i <= $totalpages)) {
-        if ($i == $page) {
-            echo "<div class='btn btn-link'> $i</div>";
-        } else {
-            echo "<a href='?page=$i' class='btn btn-link'>$i</a>";
-        }
-    }
-}
-if ($page != $totalpages) {
-    $nextpage = $page + 1;
-    echo "<a href='?page=$nextpage' class='btn btn-link'>&raquo;</a>";
-    echo "<a href='?page=$totalpages' class='btn btn-link'>&raquo;&raquo;</a>";
-}
-echo "</div>";
-echo "\n";
+print $tpl->render('pagination', array(
+    'CurrentPage' => $page,
+    'PageCount' => $totalpages,
+    'ReferralPage' => 'admin'
+));
 
 print $tpl->render('admin-bottom', array(
     'displayname' => $DisplayName,

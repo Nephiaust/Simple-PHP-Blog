@@ -3,7 +3,7 @@
         <div class="col-md-8">
             <h2 class="pb-4 mb-4 fst-bold border-bottom">Admin Panel</h2>
             <h3 class="pb-1 mb-1"><span class="fst-semibold">Weclome </span><span class="fst-italic"><?php echo $displayname; ?></span></h3>
-            <a class="btn btn-primary" href="<?php echo $displayname; ?>new.php" role="button">Create a new post</a>
+            <a class="btn btn-primary" href="<?php echo $PageURL; ?>new.php" role="button">Create a new post</a>
         </div>
         <div class="col-md-auto">
             <h5 class="fst-bold border-bottom">Post management</h5>
