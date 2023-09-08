@@ -8,17 +8,17 @@ if (DEBUG_MODE == true) {
     ini_set("display_errors", 1);
 }
 
-if (isset($_GET['q'])) {
-  $q = mysqli_real_escape_string($dbcon, $_GET['q']);
+if (isset($_GET['query'])) {
+  $query = mysqli_real_escape_string($dbcon, $_GET['query']);
 
-  $sql = "SELECT * FROM posts WHERE title LIKE '%{$q}%' OR description LIKE '%{$q}%'";
+  $sql = "SELECT * FROM posts WHERE title LIKE '%{$query}%' OR description LIKE '%{$query}%'";
   $result = mysqli_query($dbcon, $sql);
 
   if (mysqli_num_rows($result) < 1) {
     echo "Nothing found.";
   } else {
 
-    echo "<div class='w3-container w3-padding'>Showing results for $q</div>";
+    echo "<div class='w3-container w3-padding'>Showing results for $query</div>";
 
     while ($row = mysqli_fetch_assoc($result)) {
 
