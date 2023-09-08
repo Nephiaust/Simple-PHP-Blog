@@ -34,6 +34,11 @@
             "name": "rastating",
             "homepage": "https://github.com/rastating",
             "role": "Contributor"
+        },
+        {
+            "name": "Nephi.aust",
+            "homepage": "https://github.com/Nephiaust/",
+            "role": "Developer"
         }
     ],
     "require": {
