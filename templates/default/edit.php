@@ -37,7 +37,7 @@ if (isset($Edit)) {
     echo '                                <div class="modal-body">Are you sure you want to delete this post?</div>' . "\r\n";
     echo '                                <div class="modal-footer">' . "\r\n";
     echo '                                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">No</button>' . "\r\n";
-    echo '                                    <a class="btn btn-danger" href="' . SITE_URL . 'del.php?id=' . $id . '" role="button">Yes, Delete</a>' . "\r\n";
+    echo '                                    <a class="btn btn-danger" href="' . SITE_URL . 'del.php?id=' . $CurrentID . '" role="button">Yes, Delete</a>' . "\r\n";
     echo '                                </div>' . "\r\n";
     echo '                            </div>' . "\r\n";
     echo '                        </div>' . "\r\n";
