@@ -6,7 +6,7 @@ if (!isset($url_path)) {
 
 if (isset($Footer)) {
     echo '        <footer class="py-5 text-center text-body-secondary bg-body-tertiary">' . "\r\n";
-    echo '            <p>Powered by Simple-PHP-Blog. Default template built by <a href="www.nephi.au">Nephi.AU</a>.</p>' . "\r\n";
+    echo '            <p>Powered by Simple-PHP-Blog. Default template built by <a href="https://www.nephi.au">Nephi.AU</a>.</p>' . "\r\n";
     echo '            <p class="mb-0">' . "\r\n";
     echo '                <a href="#">Back to top</a>' . "\r\n";
     echo '            </p>' . "\r\n";
