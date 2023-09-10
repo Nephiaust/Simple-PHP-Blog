@@ -1,47 +1,81 @@
-<main class="container">
-    <div class="row g-5">
-        <div class="col-md-8">
-            <h3 class="pb-4 mb-4 fst-italic border-bottom">Login</h3>
-            <form class="needs-validation" novalidate method="POST">
-                <div class="col-sm-6 has-validation">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username here" required>
-                    <div class="invalid-feedback">
-                        A username is required.
-                    </div>
-                </div>
-                <div class="col-sm-6 has-validation">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" id="password" name="password" class="form-control" required>
-                    <div class="invalid-feedback">
-                        A password is required.
-                    </div>
-                </div>
-                <div class="col-sm-6 justify-content-md-end">
-                    <button type="submit" class="btn btn-primary mb-3" name="login" value="Login">Login</button>
-                </div>
-            </form>
-            <script>
-                // Example starter JavaScript for disabling form submissions if there are invalid fields
-                (() => {
-                    'use strict'
+<?php
 
-                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                    const forms = document.querySelectorAll('.needs-validation')
+if (isset($Login)) {
+    echo '<main class="container">' . "\r\n";
+    echo '    <div class="row g-5">' . "\r\n";
+    echo '        <div class="col-md-8">' . "\r\n";
+    echo '            <h3 class="pb-4 mb-4 fst-italic border-bottom">Login</h3>' . "\r\n";
+    echo '            <form class="needs-validation" novalidate method="POST">' . "\r\n";
+    echo '                <div class="col-sm-6 has-validation">' . "\r\n";
+    echo '                    <label for="username" class="form-label">Username</label>' . "\r\n";
+    echo '                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username here" required>' . "\r\n";
+    echo '                    <div class="invalid-feedback">A username is required.</div>' . "\r\n";
+    echo '                </div>' . "\r\n";
+    echo '                <div class="col-sm-6 has-validation">' . "\r\n";
+    echo '                    <label for="password" class="form-label">Password</label>' . "\r\n";
+    echo '                    <input type="password" id="password" name="password" class="form-control" required>' . "\r\n";
+    echo '                    <div class="invalid-feedback">A password is required.</div>' . "\r\n";
+    echo '                </div>' . "\r\n";
+    echo '                <div class="col-sm-6 justify-content-md-end">' . "\r\n";
+    echo '                    <button type="submit" class="btn btn-primary mb-3" name="login" value="Login">Login</button>' . "\r\n";
+    echo '                </div>' . "\r\n";
+    echo '            </form>' . "\r\n";
+    echo '            <script>' . "\r\n";
+    echo '                (() => {' . "\r\n";
+    echo "                    'use strict'" . "\r\n";
+    echo "                    const forms = document.querySelectorAll('.needs-validation')" . "\r\n";
+    echo '                    Array.from(forms).forEach(form => {' . "\r\n";
+    echo "                        form.addEventListener('submit', event => {" . "\r\n";
+    echo '                            if (!form.checkValidity()) {' . "\r\n";
+    echo '                                event.preventDefault()' . "\r\n";
+    echo '                                event.stopPropagation()' . "\r\n";
+    echo '                            }' . "\r\n";
+    echo "                            form.classList.add('was-validated')" . "\r\n";
+    echo '                        }, false)' . "\r\n";
+    echo '                    })' . "\r\n";
+    echo '                })()' . "\r\n";
+    echo '            </script>' . "\r\n";
+    echo '        </div>' . "\r\n";
+    echo '    </div>' . "\r\n";
+    echo '</main>' . "\r\n";
+}
 
-                    // Loop over them and prevent submission
-                    Array.from(forms).forEach(form => {
-                        form.addEventListener('submit', event => {
-                            if (!form.checkValidity()) {
-                                event.preventDefault()
-                                event.stopPropagation()
-                            }
-
-                            form.classList.add('was-validated')
-                        }, false)
-                    })
-                })()
-            </script>
-        </div>
-    </div>
-</main>
+if (isset($LoginFailed)) {
+    echo '<main class="container">' . "\r\n";
+    echo '    <div class="row g-5">' . "\r\n";
+    echo '        <div class="col-md-8">' . "\r\n";
+    echo '            <h3 class="pb-4 mb-4 fst-italic border-bottom">Login</h3>' . "\r\n";
+    echo '            <form class="needs-validation" novalidate method="POST">' . "\r\n";
+    echo '                <div class="col-sm-6 has-validation">' . "\r\n";
+    echo '                    <label for="username" class="form-label">Username</label>' . "\r\n";
+    echo '                    <input type="text" class="form-control is-invalid" id="username" name="username" placeholder="Enter your username here" required>' . "\r\n";
+    echo '                    <div class="invalid-feedback">A valid username is required.</div>' . "\r\n";
+    echo '                </div>' . "\r\n";
+    echo '                <div class="col-sm-6 has-validation">' . "\r\n";
+    echo '                    <label for="password" class="form-label">Password</label>' . "\r\n";
+    echo '                    <input type="password" id="password" name="password" class="form-control is-invalid" required>' . "\r\n";
+    echo '                    <div class="invalid-feedback">A valid password is required.</div>' . "\r\n";
+    echo '                </div>' . "\r\n";
+    echo '                <div class="col-sm-6 justify-content-md-end">' . "\r\n";
+    echo '                    <button type="submit" class="btn btn-primary mb-3" name="login" value="Login">Login</button>' . "\r\n";
+    echo '                </div>' . "\r\n";
+    echo '            </form>' . "\r\n";
+    echo '            <script>' . "\r\n";
+    echo '                (() => {' . "\r\n";
+    echo "                    'use strict'" . "\r\n";
+    echo "                    const forms = document.querySelectorAll('.needs-validation')" . "\r\n";
+    echo '                    Array.from(forms).forEach(form => {' . "\r\n";
+    echo "                        form.addEventListener('submit', event => {" . "\r\n";
+    echo '                            if (!form.checkValidity()) {' . "\r\n";
+    echo '                                event.preventDefault()' . "\r\n";
+    echo '                                event.stopPropagation()' . "\r\n";
+    echo '                            }' . "\r\n";
+    echo "                            form.classList.add('was-validated')" . "\r\n";
+    echo '                        }, false)' . "\r\n";
+    echo '                    })' . "\r\n";
+    echo '                })()' . "\r\n";
+    echo '            </script>' . "\r\n";
+    echo '        </div>' . "\r\n";
+    echo '    </div>' . "\r\n";
+    echo '</main>' . "\r\n";
+}

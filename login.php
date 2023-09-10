@@ -35,8 +35,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if ($login_error) {
-        print $tpl->render('login-failed', array(
-            'url_path' => $url_path
+        print $tpl->render('login', array(
+            'url_path' => $url_path,
+            'LoginFailed' => true
         ));
     } else {
 
@@ -59,14 +60,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Now we redirect the user to the admin portal.
             header("location: admin.php");
         } else {
-            print $tpl->render('login-failed', array(
-                'url_path' => $url_path
+            print $tpl->render('login', array(
+                'url_path' => $url_path,
+                'LoginFailed' => true
             ));
         }
     }
 } else {
     print $tpl->render('login', array(
-        'url_path' => $url_path
+        'url_path' => $url_path,
+        'Login' => true
     ));
 }
 
