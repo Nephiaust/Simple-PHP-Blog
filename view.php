@@ -39,7 +39,8 @@ print $tpl->render('post_view', array(
     'createdby' => $createdby,
     'permalink' => $permalink,
     'time' => $time,
-    'contents' => $contents
+    'contents' => $contents,
+    'ViewPost' => true
 ));
 
 include("footer.php");
