@@ -11,7 +11,7 @@ if (isset($HeaderTop)) {
     echo '        <meta charset="utf-8" />' . "\r\n";
     echo '        <meta name="viewport" content="width=device-width, initial-scale=1">' . "\r\n";
     if (isset($RedirectLocation) && isset($RedirectTimeout)) {
-        echo '<meta http-equiv="refresh" content="' . $RedirectTimeout . '"; url="' . $RedirectLocation . '" />"' . "\r\n";
+        echo '        <meta http-equiv="refresh" content="' . $RedirectTimeout . '"; url="' . $RedirectLocation . '" />"' . "\r\n";
     }
     echo '        <title>PHP Blog</title>' . "\r\n";
     echo '        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.27.3/ui/trumbowyg.min.css" />' . "\r\n";
