@@ -33,13 +33,23 @@ if (isset($_POST['update'])) {
     $title = mysqli_real_escape_string($dbcon, $_POST['title']);
     $description = mysqli_real_escape_string($dbcon, $_POST['description']);
     $slug = slug(mysqli_real_escape_string($dbcon, $_POST['slug']));
+    $permalink = "p/" . $id . "/" . $slug;
 
     $sql2 = "UPDATE posts SET title = '$title', description = '$description', slug = '$slug' WHERE id = $id";
 
     if (mysqli_query($dbcon, $sql2)) {
         echo '<meta http-equiv="refresh" content="0">';
     } else {
-        echo "failed to edit." . mysqli_connect_error();
+        print $tpl->render('edit', array(
+            'url_path' => $url_path,
+            'CurrentID' => $id,
+            'Slug' => $slug,
+            'Title' => $title,
+            'Description' => $description,
+            'permalink' => $permalink,
+            'ErrorMessage' => mysqli_connect_error(),
+            'Edit_Failed' => true
+        ));
     }
 }
 
@@ -49,7 +59,9 @@ print $tpl->render('edit', array(
     'CurrentID' => $id,
     'Slug' => $slug,
     'Title' => $title,
-    'Description' => $description
+    'Description' => $description,
+    'permalink' => $permalink,
+    'Edit' => true
 ));
 
 mysqli_close($dbcon);
