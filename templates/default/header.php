@@ -10,6 +10,9 @@ if (isset($HeaderTop)) {
     echo '    <head>' . "\r\n";
     echo '        <meta charset="utf-8" />' . "\r\n";
     echo '        <meta name="viewport" content="width=device-width, initial-scale=1">' . "\r\n";
+    if (isset($RedirectLocation) && isset($RedirectTimeout)) {
+        echo '<meta http-equiv="refresh" content="' . $RedirectTimeout . '"; url="' . $RedirectLocation . '" />"' . "\r\n";
+    }
     echo '        <title>PHP Blog</title>' . "\r\n";
     echo '        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.27.3/ui/trumbowyg.min.css" />' . "\r\n";
     echo '        <!-- Bootstrap v5.3.1 -->' . "\r\n";
@@ -19,9 +22,9 @@ if (isset($HeaderTop)) {
     echo '        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" />' . "\r\n";
     echo '        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" />' . "\r\n";
     echo '        <!-- Bootstrap Table v1.22.1 -->' . "\r\n";
-    echo '        <link rel="stylesheet" href="' . $url_path . 'css/bootstrap-table.css">' . "\r\n";
+    echo '        <link rel="stylesheet" href="' . SITE_URL . 'css/bootstrap-table.css">' . "\r\n";
     echo '        <!-- Custom CSS -->' . "\r\n";
-    echo '        <link href="' . $url_path . 'css/mycustom.css" rel="stylesheet" />' . "\r\n";
+    echo '        <link href="' . SITE_URL . 'css/mycustom.css" rel="stylesheet" />' . "\r\n";
     echo '    </head>' . "\r\n";
     echo '    <body>' . "\r\n";
     echo '        <svg xmlns="http://www.w3.org/2000/svg" class="d-none">' . "\r\n";
@@ -107,22 +110,22 @@ if (isset($HeaderTop)) {
     echo '        </svg>' . "\r\n";
     echo '        <div class="container">' . "\r\n";
     echo '            <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">' . "\r\n";
-    echo '                <a href="' . $url_path . '" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">' . "\r\n";
+    echo '                <a href="' . SITE_URL . '" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">' . "\r\n";
     echo '                    <svg class="bi me-2" width="40" height="32">' . "\r\n";
     echo '                        <use xlink:href="#bootstrap"></use>' . "\r\n";
     echo '                    </svg>' . "\r\n";
     echo '                    <span class="fs-4">Simple-PHP-Blog</span>' . "\r\n";
     echo '                </a>' . "\r\n";
     echo '                <ul class="nav nav-pills">' . "\r\n";
-    echo '                    <li class="nav-item"><a href="' . $url_path . '" class="nav-link active" aria-current="page">Home</a></li>' . "\r\n";
+    echo '                    <li class="nav-item"><a href="' . SITE_URL . '" class="nav-link active" aria-current="page">Home</a></li>' . "\r\n";
 }
 
 if (isset($HeaderAuth)) {
-    echo '                    <li class="nav-item"><a href=" ' . $url_path . 'new.php" class="nav-link">New Post</a></li>' . "\r\n";
-    echo '                    <li class="nav-item"><a href=" ' . $url_path . 'admin.php" class="nav-link">Admin Panel</a></li>' . "\r\n";
-    echo '                    <li class="nav-item"><a href=" ' . $url_path . 'logout.php" class="nav-link">Logout</a></li>' . "\r\n";
+    echo '                    <li class="nav-item"><a href=" ' . SITE_URL . 'new.php" class="nav-link">New Post</a></li>' . "\r\n";
+    echo '                    <li class="nav-item"><a href=" ' . SITE_URL . 'admin.php" class="nav-link">Admin Panel</a></li>' . "\r\n";
+    echo '                    <li class="nav-item"><a href=" ' . SITE_URL . 'logout.php" class="nav-link">Logout</a></li>' . "\r\n";
     echo '                </ul>' . "\r\n";
-    echo '                <form action=" ' . $url_path . 'search.php" method="GET" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">' . "\r\n";
+    echo '                <form action=" ' . SITE_URL . 'search.php" method="GET" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">' . "\r\n";
     echo '                    <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search" required id="query" name="query">' . "\r\n";
     echo '                </form>' . "\r\n";
     echo '                </header>' . "\r\n";
@@ -130,9 +133,9 @@ if (isset($HeaderAuth)) {
 }
 
 if (isset($HeaderNoAuth)) {
-    echo '                    <li class="nav-item"><a href=" ' . $url_path . 'login.php" class="nav-link">Login</a></li>' . "\r\n";
+    echo '                    <li class="nav-item"><a href=" ' . SITE_URL . 'login.php" class="nav-link">Login</a></li>' . "\r\n";
     echo '                </ul>' . "\r\n";
-    echo '                <form action=" ' . $url_path . 'search.php" method="GET" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">' . "\r\n";
+    echo '                <form action=" ' . SITE_URL . 'search.php" method="GET" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">' . "\r\n";
     echo '                    <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search" required id="query" name="query">' . "\r\n";
     echo '                </form>' . "\r\n";
     echo '                </header>' . "\r\n";

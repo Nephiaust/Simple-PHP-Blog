@@ -24,7 +24,7 @@ if (isset($Index_Post)) {
 if (isset($Index_Empty)) {
     echo '<article class="blog-post">' . "\r\n";
     echo '<h2 class="display-5 link-body-emphasis mb-1">No post yet!</h2>' . "\r\n";
-    echo '<p class="blog-post-meta">January 1, 1900 by <a href="' . $url_path . '">Admin</a></p>' . "\r\n";
+    echo '<p class="blog-post-meta">January 1, 1900 by <a href="' . SITE_URL . '">Admin</a></p>' . "\r\n";
     echo '<p>You need to post something.</p>' . "\r\n";
     echo '</article>' . "\r\n";
 }

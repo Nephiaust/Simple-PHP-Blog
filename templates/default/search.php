@@ -23,7 +23,7 @@ if (isset($SearchTop)) {
 if (isset($SearchPostList)) {
     echo '                        <tr>' . "\r\n";
     echo '                            <th scope="row" class="text-end">' . $id . '</th>' . "\r\n";
-    echo '                            <td><a class="link-offset-2 link-opacity-75-hover" href="' . $url_path . $permalink . '" role="button">' . $title . '</a></td>' . "\r\n";
+    echo '                            <td><a class="link-offset-2 link-opacity-75-hover" href="' . SITE_URL . $permalink . '" role="button">' . $title . '</a></td>' . "\r\n";
     echo '                            <td>' . $ShortDescription . '</td>' . "\r\n";
     echo '                            <td>' . $author . '</td>' . "\r\n";
     echo '                            <td>' . $time . '</td>' . "\r\n";

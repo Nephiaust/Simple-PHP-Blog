@@ -31,7 +31,7 @@ if (isset($NewPost)) {
 }
 
 if (isset($NewPostSuccessful)) {
-    echo '<meta http-equiv="refresh" content="2"; url="' . $url_path . $permalink . '" />"' . "\r\n";
+    echo '<meta http-equiv="refresh" content="2"; url="' . SITE_URL . $permalink . '" />"' . "\r\n";
     echo '<main class="container">' . "\r\n";
     echo '    <div class="row g-5">' . "\r\n";
     echo '        <div class="col-md-8">' . "\r\n";

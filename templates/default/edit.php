@@ -37,7 +37,7 @@ if (isset($Edit)) {
     echo '                                <div class="modal-body">Are you sure you want to delete this post?</div>' . "\r\n";
     echo '                                <div class="modal-footer">' . "\r\n";
     echo '                                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">No</button>' . "\r\n";
-    echo '                                    <a class="btn btn-danger" href="' . $url_path . 'del.php?id=' . $id . '" role="button">Yes, Delete</a>' . "\r\n";
+    echo '                                    <a class="btn btn-danger" href="' . SITE_URL . 'del.php?id=' . $id . '" role="button">Yes, Delete</a>' . "\r\n";
     echo '                                </div>' . "\r\n";
     echo '                            </div>' . "\r\n";
     echo '                        </div>' . "\r\n";
@@ -61,7 +61,7 @@ if (isset($Edit_Failed)) {
     echo '            <div class="alert alert-danger" role="alert">' . "\r\n";
     echo '                <p>Failed to create new blog post The error is below</p>' . "\r\n";
     echo '                <p>' . $ErrorMessage . '</p>' . "\r\n";
-    echo '                <p><a href="' . $url_path . $permalink . '">Click here to reload the post</a></p>' . "\r\n";
+    echo '                <p><a href="' . SITE_URL . $permalink . '">Click here to reload the post</a></p>' . "\r\n";
     echo '            </div>' . "\r\n";
     echo '        </div>' . "\r\n";
     echo '    </div>' . "\r\n";

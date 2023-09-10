@@ -10,7 +10,7 @@ if (isset($Admin_Header)) {
     echo '    <div class="col-md-8">' . "\r\n";
     echo '        <h2 class="pb-4 mb-4 fst-bold border-bottom">Admin Panel</h2>' . "\r\n";
     echo '        <h3 class="pb-1 mb-1"><span class="fst-semibold">Weclome </span><span class="fst-italic">' . $displayname . '</span></h3>' . "\r\n";
-    echo '        <a class="btn btn-primary" href="' . $PageURL . 'new.php" role="button">Create a new post</a>' . "\r\n";
+    echo '        <a class="btn btn-primary" href="' . SITE_URL . 'new.php" role="button">Create a new post</a>' . "\r\n";
     echo '    </div>' . "\r\n";
     echo '    <div class="col-md-auto">' . "\r\n";
     echo '        <h5 class="fst-bold border-bottom">Post management</h5>' . "\r\n";
@@ -34,7 +34,7 @@ if (isset($Admin_TablePost)) {
     echo '    <td>' . $author . '</td>' . "\r\n";
     echo '    <td>' . $time . '</td>' . "\r\n";
     echo '    <td>' . "\r\n";
-    echo '        <a class="btn btn-link" href="' . $url_path . $permalink . '" role="button">View post</a>' . "\r\n";
+    echo '        <a class="btn btn-link" href="' . SITE_URL . $permalink . '" role="button">View post</a>' . "\r\n";
     echo '    </td>' . "\r\n";
     echo '    <td>' . "\r\n";
     echo '        <div class="modal fade" id="Modal' . $id . '" tabindex="-1" aria-labelledby="Modal' . $id . 'Label" aria-hidden="true">' . "\r\n";
@@ -47,12 +47,12 @@ if (isset($Admin_TablePost)) {
     echo '                    <div class="modal-body">Are you sure you want to delete this post?</div>' . "\r\n";
     echo '                    <div class="modal-footer">' . "\r\n";
     echo '                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">No</button>' . "\r\n";
-    echo '                        <a class="btn btn-danger" href="' . $url_path . 'del.php?id=' . $id . '" role="button">Yes, Delete</a>' . "\r\n";
+    echo '                        <a class="btn btn-danger" href="' . SITE_URL . 'del.php?id=' . $id . '" role="button">Yes, Delete</a>' . "\r\n";
     echo '                    </div>' . "\r\n";
     echo '                </div>' . "\r\n";
     echo '            </div>' . "\r\n";
     echo '        </div>' . "\r\n";
-    echo '        <a class="btn btn-primary btn-sm" href="' . $url_path . 'edit.php?id=' . $id . '" role="button">Edit</a>' . "\r\n";
+    echo '        <a class="btn btn-primary btn-sm" href="' . SITE_URL . 'edit.php?id=' . $id . '" role="button">Edit</a>' . "\r\n";
     echo '        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#Modal' . $id . '">Delete</button>' . "\r\n";
     echo '    </td>' . "\r\n";
     echo '</tr>' . "\r\n";
