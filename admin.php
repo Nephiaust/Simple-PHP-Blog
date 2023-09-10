@@ -1,7 +1,6 @@
 <?php
 require_once 'includes.php';
 require_once 'header.php';
-require_once 'functions/security.php';
 
 # Turn on debug mode, and show all errors.
 if (DEBUG_MODE == true) {
@@ -9,10 +8,20 @@ if (DEBUG_MODE == true) {
     ini_set("display_errors", 1);
 }
 
-$DisplayName = $_SESSION['displayname'];        // Gets the current Display Name for the logged in user
 $rowsperpage = PAGINATION;                      // Store the configured PAGINATION option as a variable to use later.
 $page = 1;                                      // Creates the page variable
 $tpl = new Template('templates/' . TEMPALTE);   // Creates the tpl object so we can reuse it
+
+// Check if the user is logged in
+if (!checkedLoggedIn()){
+    print $tpl->render('login', array(
+        'url_path' => $url_path,
+        'Login_Required' => true
+    ));
+    sleep(2);
+}
+
+$DisplayName = $_SESSION['displayname'];        // Gets the current Display Name for the logged in user
 
 // Display the top part of the admin page.
 print $tpl->render('admin', array(
