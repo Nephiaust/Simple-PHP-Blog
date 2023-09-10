@@ -1,6 +1,5 @@
 <?php
 require_once 'includes.php';
-require_once 'header.php';
 
 # Turn on debug mode, and show all errors.
 if (DEBUG_MODE == true) {
@@ -11,21 +10,24 @@ if (DEBUG_MODE == true) {
 $rowsperpage = PAGINATION;                      // Store the configured PAGINATION option as a variable to use later.
 $page = 1;                                      // Creates the page variable
 $tpl = new Template('templates/' . TEMPALTE);   // Creates the tpl object so we can reuse it
+$intFunctions = new internalFunctions;          // Creates the internalFunction object so we can call various functions (e.g. sending the header & footer)
 
 // Check if the user is logged in
 if (!checkedLoggedIn()){
+    $intFunctions->callHeader(2,SITE_URL . 'login.php');
     print $tpl->render('login', array(
-        'url_path' => $url_path,
+        'url_path' => SITE_URL,
         'Login_Required' => true
     ));
-    sleep(2);
+    die();
 }
 
+$intFunctions->callHeader();
 $DisplayName = $_SESSION['displayname'];        // Gets the current Display Name for the logged in user
 
 // Display the top part of the admin page.
 print $tpl->render('admin', array(
-    'url_path' => $url_path,
+    'url_path' => SITE_URL,
     'displayname' => $DisplayName,
     'Admin_Header' => true
 ));
@@ -67,13 +69,12 @@ if (mysqli_num_rows($result) < 1) {
         $permalink = "p/" . $id . "/" . $slug;
 
         print $tpl->render('admin', array(
-            'url_path' => $url_path,
+            'url_path' => SITE_URL,
             'id' => $id,
             'title' => $title,
             'author' => $author,
             'time' => $time,
             'permalink' => $permalink,
-            'url_path' => $url_path,
             'Admin_TablePost' => true
         ));
     }
@@ -81,22 +82,22 @@ if (mysqli_num_rows($result) < 1) {
 
 // Finish the table off
 print $tpl->render('admin', array(
-    'url_path' => $url_path,
+    'url_path' => SITE_URL,
     'Admin_TableEnd' => true
 ));
 
 // pagination
 print $tpl->render('pagination', array(
-    'url_path' => $url_path,
+    'url_path' => SITE_URL,
     'CurrentPage' => $page,
     'PageCount' => $totalpages,
     'ReferralPage' => 'admin'
 ));
 
 print $tpl->render('admin', array(
-    'url_path' => $url_path,
+    'url_path' => SITE_URL,
     'displayname' => $DisplayName,
     'Admin_End' => true
 ));
 
-include("footer.php");
+$intFunctions->callFooter();
