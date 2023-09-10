@@ -83,3 +83,19 @@ if (isset($LoginFailed)) {
     echo '    </div>' . "\r\n";
     echo '</main>' . "\r\n";
 }
+
+if (isset($Login_Required)) {
+    echo '<meta http-equiv="refresh" content="2"; url="' . $url_path . 'login.php" />"' . "\r\n";
+    echo '<main class="container">' . "\r\n";
+    echo '    <div class="row g-5">' . "\r\n";
+    echo '        <div class="col-md-8">' . "\r\n";
+    echo '            <div class="alert alert-danger" role="alert">' . "\r\n";
+    echo '                Error, Restricted page. Please login. Redirecting to login page in 2 seconds' . "\r\n";
+    echo '                <div class="spinner-border text-primary" role="status">' . "\r\n";
+    echo '                    <span class="visually-hidden">Loading new login page...</span>' . "\r\n";
+    echo '                </div>' . "\r\n";
+    echo '            </div>' . "\r\n";
+    echo '        </div>' . "\r\n";
+    echo '    </div>' . "\r\n";
+    echo '</main>' . "\r\n";
+}
