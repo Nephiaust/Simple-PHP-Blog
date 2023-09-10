@@ -1,19 +1,18 @@
 {
-    "name": "Simple-PHP-BLog",
+    "name": "nephi.aust/simple-php-blog",
     "type": "library",
     "keywords": ["php","blog","simple","templating","database"],
     "description": "A simple blog written in PHP, using Bootstrap CSS, Bootstrap-table CSS, and MySQL.",
     "version": "5.3.0-alpha",
     "homepage": "https://github.com/Nephiaust/Simple-PHP-Blog",
     "abandoned": false,
-    "support" : [
-        {
+    "support" : {
             "issues" : "https://github.com/Nephiaust/Simple-PHP-Blog/issues/new/choose",
             "source" : "https://github.com/Nephiaust/Simple-PHP-Blog",
             "wiki" : "https://github.com/Nephiaust/Simple-PHP-Blog/wiki",
+            "docs" : "https://github.com/Nephiaust/Simple-PHP-Blog/wiki",
             "security" : "https://github.com/Nephiaust/Simple-PHP-Blog/issues/new/choose"
-        }
-    ],
+        },
     "funding": [
         {
             "type": "GitHub",
