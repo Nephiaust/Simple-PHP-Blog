@@ -15,9 +15,10 @@ $page = 1;                                      // Creates the page variable
 $tpl = new Template('templates/' . TEMPALTE);   // Creates the tpl object so we can reuse it
 
 // Display the top part of the admin page.
-print $tpl->render('admin-top', array(
+print $tpl->render('admin', array(
+    'url_path' => $url_path,
     'displayname' => $DisplayName,
-    'url_path' => $url_path
+    'Admin_Header' => true
 ));
 
 $sql = "SELECT COUNT(*) FROM posts";            // Get the number of posts available from the SQL server
@@ -56,32 +57,37 @@ if (mysqli_num_rows($result) < 1) {
         $time = $row['date'];
         $permalink = "p/" . $id . "/" . $slug;
 
-        print $tpl->render('admin-middle', array(
+        print $tpl->render('admin', array(
+            'url_path' => $url_path,
             'id' => $id,
             'title' => $title,
             'author' => $author,
             'time' => $time,
             'permalink' => $permalink,
-            'url_path' => $url_path
+            'url_path' => $url_path,
+            'Admin_TablePost' => true
         ));
     }
 }
 
 // Finish the table off
-print $tpl->render('admin-middle2', array(
-    'url_path' => $url_path
+print $tpl->render('admin', array(
+    'url_path' => $url_path,
+    'Admin_TableEnd' => true
 ));
 
 // pagination
 print $tpl->render('pagination', array(
+    'url_path' => $url_path,
     'CurrentPage' => $page,
     'PageCount' => $totalpages,
     'ReferralPage' => 'admin'
 ));
 
-print $tpl->render('admin-bottom', array(
+print $tpl->render('admin', array(
+    'url_path' => $url_path,
     'displayname' => $DisplayName,
-    'url_path' => $url_path
+    'Admin_End' => true
 ));
 
 include("footer.php");
