@@ -33,7 +33,7 @@ $createdby = $row['posted_by'];
 $time = $row['date'];
 
 
-print $tpl->render('view_post', array(
+print $tpl->render('post_view', array(
     'title' => $title,
     'createdby' => $createdby,
     'permalink' => $permalink,
