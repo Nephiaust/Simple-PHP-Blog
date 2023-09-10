@@ -30,6 +30,7 @@ if (isset($_POST['submit'])) {
     ));
 } else {
     print $tpl->render('post_new', array(
+        'url_path' => $url_path,
         'NewPost' => $true
     ));
 }

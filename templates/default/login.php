@@ -1,5 +1,9 @@
 <?php
 
+if (!isset($url_path)) {
+    die('invalid');
+}
+
 if (isset($Login)) {
     echo '<main class="container">' . "\r\n";
     echo '    <div class="row g-5">' . "\r\n";

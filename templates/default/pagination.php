@@ -1,5 +1,9 @@
 <?php
 
+if (!isset($url_path)) {
+    die('invalid');
+}
+
 /*
    ** Sets up to enable/disable the first/last parts of the pagination nav bar
 */

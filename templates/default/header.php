@@ -1,5 +1,9 @@
 <?php
 
+if (!isset($url_path)) {
+    die('invalid');
+}
+
 if (isset($HeaderTop)) {
     echo '<!DOCTYPE html>' . "\r\n";
     echo '<html lang="en" data-bs-theme="dark">' . "\r\n";

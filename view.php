@@ -34,12 +34,12 @@ $time = $row['date'];
 
 
 print $tpl->render('post_view', array(
+    'url_path' => $url_path,
     'title' => $title,
     'createdby' => $createdby,
     'permalink' => $permalink,
     'time' => $time,
-    'contents' => $contents,
-    'url_path' => $url_path
+    'contents' => $contents
 ));
 
 include("footer.php");
