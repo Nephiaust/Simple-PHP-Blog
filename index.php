@@ -11,8 +11,9 @@ if (DEBUG_MODE == true) {
 
 $tpl = new Template('templates/' . TEMPALTE);
 
-print $tpl->render('body', array(
-    'url_path' => $url_path
+print $tpl->render('default', array(
+    'url_path' => $url_path,
+    'Index_Head' => true
 ));
 
 // COUNT
@@ -41,8 +42,9 @@ $sql = "SELECT * FROM posts ORDER BY id DESC LIMIT $offset, $rowsperpage";
 $result = mysqli_query($dbcon, $sql);
 
 if (mysqli_num_rows($result) < 1) {
-    print $tpl->render('body_post-empty', array(
-        'url_path' => $url_path
+    print $tpl->render('default', array(
+        'url_path' => $url_path,
+        'Index_Empty' => true
     ));
 } else {
     while ($row = mysqli_fetch_assoc($result)) {
@@ -56,25 +58,28 @@ if (mysqli_num_rows($result) < 1) {
         $createdby = htmlentities($row['posted_by']);
 
         $permalink = "p/" . $id . "/" . $slug;
-        print $tpl->render('body_post', array(
+        print $tpl->render('default', array(
+            'url_path' => $url_path,
             'title' => $title,
             'createdby' => $createdby,
             'permalink' => $permalink,
             'time' => $time,
             'shortDesc' => $shortDesc,
-            'url_path' => $url_path
+            'Index_Post' => true
         ));
     }
 
     // pagination
     print $tpl->render('pagination', array(
+        'url_path' => $url_path,
         'CurrentPage' => $page,
         'PageCount' => $totalpages,
         'ReferralPage' => 'index'
     ));
 }
-print $tpl->render('body_bottom', array(
-    'url_path' => $url_path
+print $tpl->render('default', array(
+    'url_path' => $url_path,
+    'Index_Bottom' => true
 ));
 
 //include("categories.php");
