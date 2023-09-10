@@ -1,6 +1,5 @@
 <?php
 require_once 'includes.php';
-require_once 'functions/security.php';
 
 # Turn on debug mode, and show all errors.
 if (DEBUG_MODE == true) {
@@ -10,6 +9,18 @@ if (DEBUG_MODE == true) {
 
 $tpl = new Template('templates/' . TEMPALTE);   // Creates the tpl object so we can reuse it
 $intFunctions = new internalFunctions;          // Creates the internalFunction object so we can call various functions (e.g. sending the header & footer)
+
+// Check if the user is logged in
+if (!checkedLoggedIn()){
+    $intFunctions->callHeader(2,SITE_URL . 'login.php');
+    print $tpl->render('login', array(
+        'url_path' => SITE_URL,
+        'Login_Required' => true
+    ));
+    $intFunctions->callFooter();
+    die();
+}
+
 $intFunctions->callHeader();                    // Call for the header
 
 if (isset($_GET['id'])) {

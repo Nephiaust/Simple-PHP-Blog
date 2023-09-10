@@ -19,6 +19,7 @@ if (!checkedLoggedIn()){
         'url_path' => SITE_URL,
         'Login_Required' => true
     ));
+    $intFunctions->callFooter();
     die();
 }
 
