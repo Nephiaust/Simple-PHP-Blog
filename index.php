@@ -11,7 +11,7 @@ if (DEBUG_MODE == true) {
 
 $tpl = new Template('templates/' . TEMPALTE);
 
-print $tpl->render('default', array(
+print $tpl->render('index', array(
     'url_path' => $url_path,
     'Index_Head' => true
 ));
@@ -42,7 +42,7 @@ $sql = "SELECT * FROM posts ORDER BY id DESC LIMIT $offset, $rowsperpage";
 $result = mysqli_query($dbcon, $sql);
 
 if (mysqli_num_rows($result) < 1) {
-    print $tpl->render('default', array(
+    print $tpl->render('index', array(
         'url_path' => $url_path,
         'Index_Empty' => true
     ));
@@ -58,7 +58,7 @@ if (mysqli_num_rows($result) < 1) {
         $createdby = htmlentities($row['posted_by']);
 
         $permalink = "p/" . $id . "/" . $slug;
-        print $tpl->render('default', array(
+        print $tpl->render('index', array(
             'url_path' => $url_path,
             'title' => $title,
             'createdby' => $createdby,
@@ -77,7 +77,7 @@ if (mysqli_num_rows($result) < 1) {
         'ReferralPage' => 'index'
     ));
 }
-print $tpl->render('default', array(
+print $tpl->render('index', array(
     'url_path' => $url_path,
     'Index_Bottom' => true
 ));
