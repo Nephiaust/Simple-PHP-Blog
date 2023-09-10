@@ -1,8 +1,24 @@
 {
-    "name": "composer/composer",
+    "name": "Simple-PHP-BLog",
     "type": "library",
-    "description": "Composer helps you declare, manage and install dependencies of PHP projects. It ensures you have the right stack everywhere.",
-    "keywords": [
+    "keywords": ["php","blog","simple","templating","database"],
+    "description": "A simple blog written in PHP, using Bootstrap CSS, Bootstrap-table CSS, and MySQL.",
+    "version": "5.3.0-alpha",
+    "homepage": "https://github.com/Nephiaust/Simple-PHP-Blog",
+    "abandoned": false,
+    "support" : [
+        {
+            "issues" : "https://github.com/Nephiaust/Simple-PHP-Blog/issues/new/choose",
+            "source" : "https://github.com/Nephiaust/Simple-PHP-Blog",
+            "wiki" : "https://github.com/Nephiaust/Simple-PHP-Blog/wiki",
+            "security" : "https://github.com/Nephiaust/Simple-PHP-Blog/issues/new/choose"
+        }
+    ],
+    "funding": [
+        {
+            "type": "GitHub",
+            "url": "https://github.com/sponsors/Nephiaust"
+        }
     ],
     "authors": [
         {
@@ -42,6 +58,6 @@
         }
     ],
     "require": {
-        "php": "^7.2.5 || ^8.0"
+        "php": "^8.2"
     }
 }
