@@ -19,16 +19,18 @@ if (isset($_POST['submit'])) {
     $posted_by = mysqli_real_escape_string($dbcon, $_SESSION['username']);
 
     $sql = "INSERT INTO posts (title, description, slug,posted_by, date) VALUES('$title', '$description', '$slug', '$posted_by', '$date')";
-    mysqli_query($dbcon, $sql) or die("failed to post" . mysqli_connect_error());
+    mysqli_query($dbcon, $sql) or die(print $tpl->render('post_new', array('ErrorMessage' => mysqli_connect_error(), 'NewPostFailed' => $true)));
 
     $permalink = "p/" . mysqli_insert_id($dbcon) . "/" . $slug;
 
-    print $tpl->render('new_post-success', array(
-        'permalink' => $permalink
+    print $tpl->render('post_new', array(
+        'url_path' => $url_path,
+        'permalink' => $permalink,
+        'NewPostSuccessful' => $true
     ));
 } else {
-    print $tpl->render('new_post', array(
-        'url_path' => $url_path
+    print $tpl->render('post_new', array(
+        'NewPost' => $true
     ));
 }
 
