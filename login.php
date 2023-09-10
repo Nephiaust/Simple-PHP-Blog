@@ -1,6 +1,5 @@
 <?php
 require_once 'includes.php';
-require_once 'header.php';
 
 // Set a temporary variable to track if there is a login error (e.g. username / password mismatch or missing in the login request.)
 $login_error = false;
@@ -11,7 +10,9 @@ if (DEBUG_MODE == true) {
     ini_set("display_errors", 1);
 }
 
-$tpl = new Template('templates/' . TEMPALTE);
+$tpl = new Template('templates/' . TEMPALTE);   // Creates the tpl object so we can reuse it
+$intFunctions = new internalFunctions;          // Creates the internalFunction object so we can call various functions (e.g. sending the header & footer)
+$intFunctions->callHeader();                    // Call for the header
 
 // Lets check to see if the call was a HTTP POST request
 //    If it is, display the admin page
@@ -36,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($login_error) {
         print $tpl->render('login', array(
-            'url_path' => $url_path,
+            'url_path' => SITE_URL,
             'LoginFailed' => true
         ));
     } else {
@@ -61,16 +62,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("location: admin.php");
         } else {
             print $tpl->render('login', array(
-                'url_path' => $url_path,
+                'url_path' => SITE_URL,
                 'LoginFailed' => true
             ));
         }
     }
 } else {
     print $tpl->render('login', array(
-        'url_path' => $url_path,
+        'url_path' => SITE_URL,
         'Login' => true
     ));
 }
 
-include("footer.php");
+$intFunctions->callFooter();

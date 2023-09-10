@@ -1,12 +1,15 @@
 <?php
 require_once 'includes.php';
-require_once 'header.php';
 
 # Turn on debug mode, and show all errors.
 if (DEBUG_MODE == true) {
     error_reporting(E_ALL);
     ini_set("display_errors", 1);
 }
+
+$tpl = new Template('templates/' . TEMPALTE);   // Creates the tpl object so we can reuse it
+$intFunctions = new internalFunctions;          // Creates the internalFunction object so we can call various functions (e.g. sending the header & footer)
+$intFunctions->callHeader();                    // Call for the header
 
 $id = (int)$_GET['id'];
 if ($id < 1) {
@@ -57,4 +60,4 @@ while ($r = mysqli_fetch_assoc($res)) {
     echo '</div>';
 }
 
-include("footer.php");
+$intFunctions->callFooter();

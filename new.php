@@ -1,6 +1,5 @@
 <?php
 require_once 'includes.php';
-require_once 'header.php';
 require_once 'functions/security.php';
 
 # Turn on debug mode, and show all errors.
@@ -9,7 +8,9 @@ if (DEBUG_MODE == true) {
     ini_set("display_errors", 1);
 }
 
-$tpl = new Template('templates/' . TEMPALTE);
+$tpl = new Template('templates/' . TEMPALTE);   // Creates the tpl object so we can reuse it
+$intFunctions = new internalFunctions;          // Creates the internalFunction object so we can call various functions (e.g. sending the header & footer)
+$intFunctions->callHeader();                    // Call for the header
 
 if (isset($_POST['submit'])) {
     $title = mysqli_real_escape_string($dbcon, $_POST['title']);
@@ -24,15 +25,15 @@ if (isset($_POST['submit'])) {
     $permalink = "p/" . mysqli_insert_id($dbcon) . "/" . $slug;
 
     print $tpl->render('post_new', array(
-        'url_path' => $url_path,
+        'url_path' => SITE_URL,
         'permalink' => $permalink,
         'NewPostSuccessful' => $true
     ));
 } else {
     print $tpl->render('post_new', array(
-        'url_path' => $url_path,
+        'url_path' => SITE_URL,
         'NewPost' => $true
     ));
 }
 
-include("footer.php");
+$intFunctions->callFooter();

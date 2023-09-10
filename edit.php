@@ -1,6 +1,5 @@
 <?php
 require_once 'includes.php';
-require_once 'header.php';
 require_once 'functions/security.php';
 
 # Turn on debug mode, and show all errors.
@@ -9,7 +8,9 @@ if (DEBUG_MODE == true) {
     ini_set("display_errors", 1);
 }
 
-$tpl = new Template('templates/' . TEMPALTE);
+$tpl = new Template('templates/' . TEMPALTE);   // Creates the tpl object so we can reuse it
+$intFunctions = new internalFunctions;          // Creates the internalFunction object so we can call various functions (e.g. sending the header & footer)
+$intFunctions->callHeader();                    // Call for the header
 
 $id = (int)$_GET['id'];
 if ($id < 1) {
@@ -41,7 +42,7 @@ if (isset($_POST['update'])) {
         echo '<meta http-equiv="refresh" content="0">';
     } else {
         print $tpl->render('edit', array(
-            'url_path' => $url_path,
+            'url_path' => SITE_URL,
             'CurrentID' => $id,
             'Slug' => $slug,
             'Title' => $title,
@@ -55,7 +56,7 @@ if (isset($_POST['update'])) {
 
 
 print $tpl->render('edit', array(
-    'url_path' => $url_path,
+    'url_path' => SITE_URL,
     'CurrentID' => $id,
     'Slug' => $slug,
     'Title' => $title,
@@ -65,4 +66,4 @@ print $tpl->render('edit', array(
 ));
 
 mysqli_close($dbcon);
-include("footer.php");
+$intFunctions->callFooter();

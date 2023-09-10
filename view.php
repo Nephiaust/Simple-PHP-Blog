@@ -1,6 +1,5 @@
 <?php
 require_once 'includes.php';
-require_once 'header.php';
 
 # Turn on debug mode, and show all errors.
 if (DEBUG_MODE == true) {
@@ -10,17 +9,19 @@ if (DEBUG_MODE == true) {
 
 $id = (int)$_GET['id'];
 if ($id < 1) {
-    header("location: $url_path");
+    header("location: SITE_URL");
 }
 $sql = "Select * FROM posts WHERE id = '$id'";
 $result = mysqli_query($dbcon, $sql);
 
 $invalid = mysqli_num_rows($result);
 if ($invalid == 0) {
-    header("location: $url_path");
+    header("location: SITE_URL");
 }
 
-$tpl = new Template('templates/' . TEMPALTE);
+$tpl = new Template('templates/' . TEMPALTE);   // Creates the tpl object so we can reuse it
+$intFunctions = new internalFunctions;          // Creates the internalFunction object so we can call various functions (e.g. sending the header & footer)
+$intFunctions->callHeader();                    // Call for the header
 
 $hsql = "SELECT * FROM posts WHERE id = '$id'";
 $res = mysqli_query($dbcon, $hsql);
@@ -34,7 +35,7 @@ $time = $row['date'];
 
 
 print $tpl->render('post_view', array(
-    'url_path' => $url_path,
+    'url_path' => SITE_URL,
     'title' => $title,
     'createdby' => $createdby,
     'permalink' => $permalink,
@@ -43,4 +44,4 @@ print $tpl->render('post_view', array(
     'ViewPost' => true
 ));
 
-include("footer.php");
+$intFunctions->callFooter();

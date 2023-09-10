@@ -1,7 +1,5 @@
 <?php
 require_once 'includes.php';
-require 'header.php';
-
 
 # Turn on debug mode, and show all errors.
 if (DEBUG_MODE == true) {
@@ -9,10 +7,12 @@ if (DEBUG_MODE == true) {
     ini_set("display_errors", 1);
 }
 
-$tpl = new Template('templates/' . TEMPALTE);
+$tpl = new Template('templates/' . TEMPALTE);   // Creates the tpl object so we can reuse it
+$intFunctions = new internalFunctions;          // Creates the internalFunction object so we can call various functions (e.g. sending the header & footer)
+$intFunctions->callHeader();                    // Call for the header
 
 print $tpl->render('index', array(
-    'url_path' => $url_path,
+    'url_path' => SITE_URL,
     'Index_Head' => true
 ));
 
@@ -43,7 +43,7 @@ $result = mysqli_query($dbcon, $sql);
 
 if (mysqli_num_rows($result) < 1) {
     print $tpl->render('index', array(
-        'url_path' => $url_path,
+        'url_path' => SITE_URL,
         'Index_Empty' => true
     ));
 } else {
@@ -59,7 +59,7 @@ if (mysqli_num_rows($result) < 1) {
 
         $permalink = "p/" . $id . "/" . $slug;
         print $tpl->render('index', array(
-            'url_path' => $url_path,
+            'url_path' => SITE_URL,
             'title' => $title,
             'createdby' => $createdby,
             'permalink' => $permalink,
@@ -71,16 +71,16 @@ if (mysqli_num_rows($result) < 1) {
 
     // pagination
     print $tpl->render('pagination', array(
-        'url_path' => $url_path,
+        'url_path' => SITE_URL,
         'CurrentPage' => $page,
         'PageCount' => $totalpages,
         'ReferralPage' => 'index'
     ));
 }
 print $tpl->render('index', array(
-    'url_path' => $url_path,
+    'url_path' => SITE_URL,
     'Index_Bottom' => true
 ));
 
 //include("categories.php");
-include("footer.php");
+$intFunctions->callFooter();

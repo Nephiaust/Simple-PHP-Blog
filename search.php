@@ -1,6 +1,5 @@
 <?php
 require_once 'includes.php';
-require_once 'header.php';
 
 # Turn on debug mode, and show all errors.
 if (DEBUG_MODE == true) {
@@ -8,10 +7,12 @@ if (DEBUG_MODE == true) {
   ini_set("display_errors", 1);
 }
 
-$tpl = new Template('templates/' . TEMPALTE);
+$tpl = new Template('templates/' . TEMPALTE);   // Creates the tpl object so we can reuse it
+$intFunctions = new internalFunctions;          // Creates the internalFunction object so we can call various functions (e.g. sending the header & footer)
+$intFunctions->callHeader();                    // Call for the header
 
 print $tpl->render('search', array(
-  'url_path' => $url_path,
+  'url_path' => SITE_URL,
   'SearchTop' => true
 ));
 
@@ -23,11 +24,11 @@ if (isset($_GET['query'])) {
 
   if (mysqli_num_rows($result) < 1) {
     print $tpl->render('search', array(
-      'url_path' => $url_path,
+      'url_path' => SITE_URL,
       'SearchNothing' => true
     ));
     print $tpl->render('search', array(
-      'url_path' => $url_path,
+      'url_path' => SITE_URL,
       'SearchPostListEnd' => true
     ));
   } else {
@@ -43,7 +44,7 @@ if (isset($_GET['query'])) {
       $permalink = "p/" . $id . "/" . $slug;
 
       print $tpl->render('search', array(
-        'url_path' => $url_path,
+        'url_path' => SITE_URL,
         'SearchPostList' => true,
         'id' => $id,
         'title' => $title,
@@ -55,24 +56,24 @@ if (isset($_GET['query'])) {
     }
 
     print $tpl->render('search', array(
-      'url_path' => $url_path,
+      'url_path' => SITE_URL,
       'SearchPostListEnd' => true
     ));
   }
 } else {
   print $tpl->render('search', array(
-    'url_path' => $url_path,
+    'url_path' => SITE_URL,
     'SearchBlank' => true
   ));
   print $tpl->render('search', array(
-    'url_path' => $url_path,
+    'url_path' => SITE_URL,
     'SearchPostListEnd' => true
   ));
 }
 
 print $tpl->render('search', array(
-  'url_path' => $url_path,
+  'url_path' => SITE_URL,
   'SearchEnd' => true
 ));
 
-include("footer.php");
+$intFunctions->callFooter();
