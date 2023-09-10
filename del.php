@@ -19,17 +19,19 @@ if (isset($_GET['id'])) {
 
     if ($result) {
         if (mysqli_affected_rows($dbcon) > 0){
-            print $tpl->render('del_post', array(
+            print $tpl->render('post_delete', array(
                 'url_path' => $url_path
             ));
         } else {
-            print $tpl->render('del_post-failed', array(
-                'url_path' => $url_path
+            print $tpl->render('post_delete', array(
+                'url_path' => $url_path,
+                'DeletePostFailed' => true
             ));
         }
     } else {
-        print $tpl->render('del_post-failed', array(
+        print $tpl->render('post_delete', array(
             'url_path' => $url_path,
+            'DeletePostFailed' => true,
             'ErrorMessage' => mysqli_connect_error()
         ));
     }
