@@ -1,0 +1,53 @@
+name: Build squence
+
+on:
+  push:
+    paths-ignore: ".*"
+    tags:
+      - buildit
+
+jobs:
+  build:
+    name: Build Project
+    permissions:
+      actions: read
+      checks: read
+      contents: write
+      packages: write
+      deployments: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Compress files for deployment
+        run: find . ! -ipath '.' ! -ipath './.git*' ! -ipath './.vs*' ! -ipath '*.md' -exec tar -zcvf build.md/simple-php-blog.tar.gz {} +
+      - name: Upload tar file
+        uses: actions/upload-artifact@v3
+        with:
+          name: release
+          path: build.md/simple-php-blog.tar.gz
+  release:
+    name: Create release
+    needs: build
+    permissions:
+      actions: read
+      checks: read
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+        - name: Download build artifact
+          uses: actions/download-artifact@v3
+          with:
+            name: my-artifact
+            
+        - name: Display structure of downloaded files
+          run: ls -R
+
+        - name: Create Release
+          uses: marvinpinto/action-automatic-releases@latest
+          with:
+            prerelease: false
+            automatic_release_tag: latest
+            repo_token: "${{ secrets.GITHUB_TOKEN }}"
+            files: simple-php-blog.tar.gz
+            title: Simple PHP Blog version 
