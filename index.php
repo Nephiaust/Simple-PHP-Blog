@@ -26,7 +26,7 @@ $totalpages = ceil($numrows / $rowsperpage);
 
 $page = 1;
 if (isset($_GET['page']) && is_numeric($_GET['page'])) {
-    $page = (int)$_GET['page'];
+    $page = (int)filter_var($_GET['page'], FILTER_VALIDATE_INT);
 }
 
 if ($page > $totalpages) {

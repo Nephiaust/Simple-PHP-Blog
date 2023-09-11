@@ -30,7 +30,7 @@ $intFunctions->callHeader();                    // Call for the header
 
 $id = (int)filter_var($_GET['id'], FILTER_VALIDATE_INT);
 if ($id < 1) {
-    header("location: index.php");
+    header("location: " . SITE_URL);
 }
 
 $sql = "SELECT * FROM posts WHERE id = '$id'";
