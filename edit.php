@@ -9,6 +9,11 @@ if (DEBUG_MODE == true) {
 
 $tpl = new Template('templates/' . TEMPALTE);   // Creates the tpl object so we can reuse it
 $intFunctions = new internalFunctions;          // Creates the internalFunction object so we can call various functions (e.g. sending the header & footer)
+$ValidateInt = array(                           // Sets an option for the FILTER_VALIDATE_INT to allow anything above 0 and is an INT
+    'options' => array(
+        'min_range' => 0,
+    )
+);
 
 // Check if the user is logged in
 if (!checkedLoggedIn()){
@@ -23,8 +28,7 @@ if (!checkedLoggedIn()){
 
 $intFunctions->callHeader();                    // Call for the header
 
-
-$id = (int)$_GET['id'];
+$id = (int)filter_var($_GET['id'], FILTER_VALIDATE_INT);
 if ($id < 1) {
     header("location: index.php");
 }
@@ -42,7 +46,7 @@ $slug = $row['slug'];
 $permalink = "p/" . $id . "/" . $slug;
 
 if (isset($_POST['update'])) {
-    $id = $_POST['id'];
+    $id = (int)filter_var($_GET['id'], FILTER_VALIDATE_INT);
     $title = mysqli_real_escape_string($dbcon, $_POST['title']);
     $description = mysqli_real_escape_string($dbcon, $_POST['description']);
     $slug = slug(mysqli_real_escape_string($dbcon, $_POST['slug']));
