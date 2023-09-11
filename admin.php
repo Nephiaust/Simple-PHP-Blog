@@ -11,6 +11,11 @@ $rowsperpage = PAGINATION;                      // Store the configured PAGINATI
 $page = 1;                                      // Creates the page variable
 $tpl = new Template('templates/' . TEMPALTE);   // Creates the tpl object so we can reuse it
 $intFunctions = new internalFunctions;          // Creates the internalFunction object so we can call various functions (e.g. sending the header & footer)
+$ValidateInt = array(                           // Sets an option for the FILTER_VALIDATE_INT to allow anything above 0 and is an INT
+    'options' => array(
+        'min_range' => 0,
+    )
+);
 
 // Check if the user is logged in
 if (!checkedLoggedIn()){
@@ -24,7 +29,7 @@ if (!checkedLoggedIn()){
 }
 
 $intFunctions->callHeader();
-$DisplayName = $_SESSION['displayname'];        // Gets the current Display Name for the logged in user
+$DisplayName = htmlspecialchars($_SESSION['displayname']);        // Gets the current Display Name for the logged in user
 
 // Display the top part of the admin page.
 print $tpl->render('admin', array(
@@ -42,7 +47,7 @@ $totalpages = ceil($numrows / $rowsperpage);    // Work out how many pages in to
 
 // Checks if the request has the `page` set and is a number, so we can return that page.
 if (isset($_GET['page']) && is_numeric($_GET['page'])) {
-    $page = (int)$_GET['page'];
+    $page = (int)filter_var($_GET['page'], FILTER_VALIDATE_INT, $ValidateInt);
 }
 // Just a check to make sure the requested page is lower than the total number of pages
 if ($page > $totalpages) {
