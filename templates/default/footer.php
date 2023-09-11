@@ -21,10 +21,13 @@ if (isset($Footer)) {
     echo '        <script src="'.SITE_URL.'js/bootstrap-table/bootstrap-table.js"></script>' . "\r\n";
     echo '        <!-- <script src="'.SITE_URL.'js/bootstrap-table/bootstrap-table-locale-all.js"></script> -->' . "\r\n";
     echo '        <!-- Summernote v0.8.20 -->' . "\r\n";
-    echo '        <script src="' . SITE_URL . 'js/summernote/summernote-bs5.min.js"></script>' . "\r\n";
+    echo '        <script src="' . SITE_URL . 'js/summernote/summernote-lite.min.js"></script>' . "\r\n";
     echo '        <script>' . "\r\n";
     echo '            $(document).ready(function() {' . "\r\n";
-    echo "                $('#summernote').summernote();" . "\r\n";
+    echo "                $('#summernote').summernote(" . "\r\n";
+    echo "                    height: 300," . "\r\n";
+    echo "                    spellCheck: true" . "\r\n";
+    echo "                );" . "\r\n";
     echo '            });' . "\r\n";
     echo '        </script>' . "\r\n";
     echo '    </body>' . "\r\n";

@@ -23,7 +23,7 @@ if (isset($HeaderTop)) {
     echo '        <!-- Bootstrap Table v1.22.1 -->' . "\r\n";
     echo '        <link rel="stylesheet" href="' . SITE_URL . 'css/bootstrap-table/bootstrap-table.css">' . "\r\n";
     echo '        <!-- Summernote v0.8.20 -->' . "\r\n";
-    echo '        <link rel="stylesheet" href="' . SITE_URL . 'css/summernote/summernote-bs5.min.css" />' . "\r\n";
+    echo '        <link rel="stylesheet" href="' . SITE_URL . 'css/summernote/summernote-lite.min.css" />' . "\r\n";
     echo '        <!-- Custom CSS -->' . "\r\n";
     echo '        <link href="' . SITE_URL . 'css/mycustom.css" rel="stylesheet" />' . "\r\n";
     echo '    </head>' . "\r\n";
