@@ -24,10 +24,7 @@ if (isset($Footer)) {
     echo '        <script src="' . SITE_URL . 'js/summernote/summernote-lite.min.js"></script>' . "\r\n";
     echo '        <script>' . "\r\n";
     echo '            $(document).ready(function() {' . "\r\n";
-    echo "                $('#summernote').summernote(" . "\r\n";
-    echo "                    height: 300," . "\r\n";
-    echo "                    spellCheck: true" . "\r\n";
-    echo "                );" . "\r\n";
+    echo "                $('#summernote').summernote();" . "\r\n";
     echo '            });' . "\r\n";
     echo '        </script>' . "\r\n";
     echo '    </body>' . "\r\n";
